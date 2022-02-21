@@ -1,0 +1,130 @@
+class Customer
+	character mesh
+	public string customerType, human or robot
+	public Glass myGlass;
+
+	function	SpawnCup 
+		create an instance of Glass
+
+	function onCollision(other object)
+		{
+			if other == myGlass)
+			{
+			  DrinkComplete()
+			}
+			else if other.type() is of Glass // if can figure out how.. 
+			{
+			 	 Reaction(3); // mixed wrong drink
+			}
+			else // there is nothing else to check
+			{
+				/// DO NOTHING
+			]
+
+		}
+
+// When the drink is finished the customer reacts. If you made the drink correct you get points and they leave and positive sound plays. 
+// If you made the drink wrong you loose points and they leave and negative sound plays. 
+	function	Reaction - (PARAM int reactionIntensity)
+
+		if param = 4
+		{
+		play Positive sound 1)
+		score ++++ // biggest reward
+		DestroyCustomer()
+		}
+		else if = 3
+		{
+		score+	// meager reward
+		play Negative sound 2, 
+		DestroyCustomer()
+		else if = 2 //xenophobe reaction
+		{
+			score-- // Costs you money in Bribes to the Health Inspector
+			def plays a negative sound
+			DestroyCustomer()
+
+		}
+		// if the reward is set to 1 or ANYTHING ELSE
+		// Then you are touching the glass with the correct hand
+		else
+		{	
+			may play a positive sound plays 
+			// do nothing else
+		}
+
+
+	function DestroyCustomer
+		{
+			cast to glass > DestroyGlass
+			Destroy(self). 
+		}
+
+
+to (needs to know which hand is touching the cup)
+
+Score ObjectHUD or Level Variable 
+	public int score; 
+
+class  VRPawn
+
+public string handtype1 = robot;
+public string handtype2 = human;
+
+// - Player
+//	-Which hand is touching the glass.
+
+	onGrab
+		Check if object is Glass (verify)
+		{
+			Cast to instance of Glass
+			call function BeingHeld(Param string handtype)
+		}
+		
+class Glass
+	
+	bool isDrinkCorrect;
+
+
+	DrinkComplete()
+	{
+		Confirm Contents of valid drink
+		
+		if isDrinkCorrect = true
+		{
+			Cast to Customer 
+			Reaction(PARAM int reactionIntensity = 4)
+
+		}
+		else if isDrinkCorrect = false
+		{
+			Cast to Customer 
+			Reaction(PARAM int reactionIntensity = 3)
+		}
+
+	}
+
+	BeingHeld (Param handtype)
+	{
+
+		if (handtype != customerType)
+		{
+			Cast to Customer 
+			Reaction(PARAM int reactionIntensity = 2)
+		}
+		else
+		{
+			Cast to Customer 
+			Reaction(PARAM int reactionIntensity = 1)
+		}
+
+	}
+
+		
+	onCollision (other object)
+	If hand 1 AND customer = robot
+		{
+			reactPositive
+		{
+	else
+			
